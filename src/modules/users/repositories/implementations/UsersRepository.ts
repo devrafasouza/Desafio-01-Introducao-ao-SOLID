@@ -24,6 +24,9 @@ class UsersRepository implements IUsersRepository {
     Object.assign(user, {
       name,
       email,
+      created_at: new Date(),
+      updated_at: new Date(),
+      admin: false,
     }); /* Escreve no objeto as propriedades recebidas */
 
     this.users.push(user);
@@ -44,12 +47,13 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    const userAdmin = receivedUser;
+    const updatedUser = this.users.find((user) => user === receivedUser);
 
-    userAdmin.admin = true;
-    userAdmin.updated_at = new Date();
+    updatedUser.admin = true;
+    updatedUser.updated_at = new Date();
+    updatedUser.created_at = new Date();
 
-    return userAdmin;
+    return updatedUser;
   }
 
   list(): User[] {
