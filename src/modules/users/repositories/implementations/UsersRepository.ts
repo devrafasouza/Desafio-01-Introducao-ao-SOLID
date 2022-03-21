@@ -27,22 +27,33 @@ class UsersRepository implements IUsersRepository {
     }); /* Escreve no objeto as propriedades recebidas */
 
     this.users.push(user);
+
+    return user;
   }
 
   findById(id: string): User | undefined {
-    // Complete aqui
+    const userId = this.users.find((user) => user.id === id);
+
+    return userId;
   }
 
   findByEmail(email: string): User | undefined {
-    // Complete aqui
+    const userEmail = this.users.find((user) => user.email === email);
+
+    return userEmail;
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const userAdmin = receivedUser;
+
+    userAdmin.admin = true;
+    userAdmin.updated_at = new Date();
+
+    return userAdmin;
   }
 
   list(): User[] {
-    // Complete aqui
+    return this.users;
   }
 }
 
